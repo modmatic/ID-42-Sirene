@@ -2,8 +2,13 @@
 #define GLOBALS_H
 
 #include <Arduino.h>
-#include <Arduboy2.h>
-#include <ArduboyTones.h>
+#if DOTMG_CART_SAMD51
+  #include <Arduboy2DotMG.h>
+  #include <ArduboyTonesDotMG.h>
+#else
+  #include <Arduboy2.h>
+  #include <ArduboyTones.h>
+#endif
 #include "bitmaps.h"
 
 //define menu states (on main menu)
@@ -36,7 +41,11 @@
 #define MAX_ENEMY_BULLETS            3
 #define MAX_BOSS_BULLETS             6
 
-Arduboy2Base arduboy;
+#if DOTMG_CART_SAMD51
+  Arduboy2 arduboy;
+#else
+  Arduboy2Base arduboy;
+#endif
 Sprites sprites;
 ArduboyTones sound(arduboy.audio.enabled);
 
@@ -44,7 +53,7 @@ byte gameState = STATE_MENU_INTRO;    // start the game with the TEAM a.r.g. log
 byte menuSelection = STATE_MENU_PLAY; // PLAY menu item is pre-selected
 byte globalCounter = 0;
 byte stage = STAGE_TO_START_WITH -1;
-unsigned long scorePlayer; 
+unsigned long scorePlayer;
 byte backgroundIsVisible;
 byte gameOverAndStageFase;
 byte currentWave;

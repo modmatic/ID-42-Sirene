@@ -45,7 +45,11 @@ void stateMenuMain()
   sprites.drawSelfMasked(92, 32 + 8*(menuSelection-2), trident, 0);
   if (arduboy.justPressed(DOWN_BUTTON) && (menuSelection < 5)) menuSelection++;
   if (arduboy.justPressed(UP_BUTTON) && (menuSelection > 2)) menuSelection--;
+#if DOTMG_CART_SAMD51
+  if (arduboy.justPressed(A_BUTTON)) gameState = menuSelection;
+#else
   if (arduboy.justPressed(B_BUTTON)) gameState = menuSelection;
+#endif
 }
 
 void stateMenuHelp()

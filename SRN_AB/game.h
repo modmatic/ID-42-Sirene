@@ -139,7 +139,11 @@ void stateGamePlaying()
 void stateGamePause()
 {
   sprites.drawSelfMasked(47, 24, textPause, 0);
+#if DOTMG_CART_SAMD51
+  if (arduboy.justPressed(START_BUTTON)) gameState = STATE_GAME_PLAYING;
+#else
   if (arduboy.justPressed(A_BUTTON)) gameState = STATE_GAME_PLAYING;
+#endif
 };
 
 void gameOverShowHighScore()
