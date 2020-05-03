@@ -41,6 +41,9 @@ const FunctionPointer PROGMEM  mainGameLoop[] = {
 
 
 void setup() {
+#if DOTMG_CART_SAMD51
+  arduboy.setColorTheme(THEME_ELEKTRONIK);
+#endif
   arduboy.begin();
   arduboy.setFrameRate(60);                                 // set the frame rate of the game at 60 fps
 }
@@ -53,4 +56,3 @@ void loop() {
   ((FunctionPointer) pgm_read_word (&mainGameLoop[gameState]))();
   arduboy.display();
 }
-
